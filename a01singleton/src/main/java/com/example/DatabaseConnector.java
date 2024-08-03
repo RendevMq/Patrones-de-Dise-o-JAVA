@@ -9,17 +9,33 @@ package com.example;
 
 public class DatabaseConnector {
 
-    private static DatabaseConnector databaseConnector;
+    private static DatabaseConnector databaseConnectorInstance;
 
     private DatabaseConnector(){
         System.out.println("Objeto Creado");
     }
 
-    private static DatabaseConnector getInstance(){
+    public static synchronized DatabaseConnector getInstance(){ //synchronized, misma instancia por si se trabaja con mas hilos
         //Con esto, ya implementamos el patron Singleton
-        if (databaseConnector == null) {
-            databaseConnector = new DatabaseConnector();
+        //Si ya fue creado, me retorna el mismo objeto en memoria
+        if (databaseConnectorInstance == null) {
+            databaseConnectorInstance = new DatabaseConnector();
         }
-        return databaseConnector;
+        return databaseConnectorInstance;
+    }
+    public void connectDatabase(){
+
+        if(databaseConnectorInstance == null){
+            throw new NullPointerException("La instancia no ha sido creada");
+        }
+        System.out.println("Conectando a la base de datos... " + databaseConnectorInstance);
+    }
+
+    public void disconnectDatabase(){
+
+        if(databaseConnectorInstance == null){
+            throw new NullPointerException("La instancia no ha sido creada");
+        }
+        System.out.println("Desconectando la base de datos... " + databaseConnectorInstance);
     }
 }
