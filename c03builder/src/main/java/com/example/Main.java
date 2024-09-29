@@ -22,8 +22,8 @@ public class Main {
                             .setName("Santiago")
                             .setGender("Male")
 
-                            .setAdress(new Address("Av. Lima 4545" , "Lima" , "Peru" , "15663"))
-                            .setAdress("Av. brasil 4545" , "Lima" , "Peru" , "45121")
+                            .setAddress(new Address("Av. Lima 4545" , "Lima" , "Peru" , "15663"))
+                            .setAddress("Av. brasil 4545" , "Lima" , "Peru" , "45121")
 
                             .setPhone(new Phone("13245","212","Fijo"))
                             .setPhone("23132132", "5445", "Cel")

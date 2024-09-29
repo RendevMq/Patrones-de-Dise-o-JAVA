@@ -27,6 +27,7 @@ public class Employee {
         this.phones = phones;
         this.contacts = contacts;
     }
+
     //IMPLEMENTAMOS EL PATRON DE DISENO BUILDER
     //CREAMOS UNA CLASE INTERNA
     public static class EmployeeBuilder implements IBuilder{
@@ -55,12 +56,12 @@ public class Employee {
             this.gender = gender;
             return this;
         }
-        public EmployeeBuilder setAdress(Address address) {
+        public EmployeeBuilder setAddress(Address address) {
             this.address = address;
             return this;
         }
 
-        public EmployeeBuilder setAdress(String address,String city, String country,String cp ) {
+        public EmployeeBuilder setAddress(String address,String city, String country,String cp ) {
             this.address = new Address(address,city,country,cp);
             return this;
         }
@@ -86,6 +87,13 @@ public class Employee {
 
         @Override
         public Employee build() {
+            if (name == null || name.isEmpty()) {
+                throw new IllegalStateException("El nombre es obligatorio.");
+            }
+            if (age <= 0) {
+                throw new IllegalStateException("La edad debe ser mayor que cero.");
+            }
+            // Otras validaciones según sea necesario
             return new Employee(age,name,gender,address,phones,contacts);
         }
 

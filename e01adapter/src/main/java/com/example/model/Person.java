@@ -5,7 +5,6 @@ public class Person {
     private String lastName;
     private Integer age;
 
-    
     public Person() {
     }
 
