@@ -2,7 +2,7 @@
 
 El Patrón Composite es un patrón de diseño estructural que permite tratar objetos individuales y compuestos de manera uniforme. Este patrón organiza los objetos en una jerarquía de forma que tanto los elementos simples como los compuestos (que agrupan varios objetos) puedan ser tratados de la misma forma, facilitando el manejo de estructuras jerárquicas complejas.
 <p align="center">
-  <img src="/IMG.png" alt="reto" width="800"/>
+  <img src="/IMG.png" alt="imagen" width="800"/>
 </p>
 
 # Ejemplo - Gestión de Proyectos de Construcción 
