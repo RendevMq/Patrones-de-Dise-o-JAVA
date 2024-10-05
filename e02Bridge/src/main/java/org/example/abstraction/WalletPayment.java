@@ -9,6 +9,7 @@ public class WalletPayment extends Payment{
     }
     @Override
     public void makePayment(double amount) {
-
+        System.out.println("Processing card payment...");
+        paymentGateway.processPayment(amount);
     }
 }

@@ -1,7 +1,9 @@
 #  Patrón Bridge 
 El Patrón Bridge es un patrón de diseño estructural que separa la abstracción de su implementación, permitiendo que ambas puedan evolucionar de manera independiente. En lugar de unir abstracción e implementación en una sola clase, este patrón usa una referencia hacia una implementación, permitiendo múltiples combinaciones entre ambas.
 
-
+<p align="center">
+  <img src="/IMG.png" alt="reto" width="800"/>
+</p>
 
 ## Ejemplo del Sistema de Pago en Línea
 
