@@ -1,4 +1,4 @@
-### Patrón Decorador en Java - Ejemplo de Codificación, Compresión y Registro de Operaciones
+### README: Patrón Decorador en Java - Ejemplo de Codificación, Compresión y Registro de Operaciones
 
 ---
 
@@ -79,6 +79,24 @@ Esta combinación permite ejecutar las operaciones de manera encadenada, añadie
 
 ---
 
+#### Ejemplo Práctico:
+
+Si no usaras el patrón Decorador, tendrías que crear subclases como:
+
+- `CompressedFileDataSource`
+- `EncodedFileDataSource`
+- `LoggedFileDataSource`
+- `CompressedAndEncodedFileDataSource`
+- `CompressedAndLoggedFileDataSource`
+- `EncodedAndLoggedFileDataSource`
+- `CompressedAndEncodedAndLoggedFileDataSource`
+
+Y este número crecería exponencialmente cada vez que agregaras una nueva funcionalidad.
+
+En cambio, con el patrón Decorador, solo necesitas crear decoradores individuales para cada funcionalidad (`CompressionDecorator`, `EncryptionDecorator`, `LoggingDecorator`) y puedes combinarlos como lo desees, en el orden que prefieras.
+
+---
+
 #### Escenario sin el Patrón Decorador:
 
 Si no utilizáramos el patrón Decorador, habría que crear una subclase para cada nueva combinación de funcionalidades. Por ejemplo, para una `FileDataSource` que comprime y codifica, necesitarías una subclase que implemente ambas características. Si añadimos más funcionalidades (como el registro de operaciones), el número de subclases crecería exponencialmente. Esto llevaría a un **diseño rígido y difícil de mantener**.
@@ -99,4 +117,4 @@ Para ejecutar el ejemplo:
 
 El patrón Decorador en este ejemplo demuestra cómo podemos **añadir funcionalidad de manera flexible y dinámica** sin modificar la clase base original. Con decoradores como la compresión, la codificación y el registro de operaciones, logramos un sistema altamente **modular, extensible** y **fácil de mantener**, donde las funcionalidades adicionales se pueden combinar y reutilizar de forma dinámica.
 
---- 
+---
