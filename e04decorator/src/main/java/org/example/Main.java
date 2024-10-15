@@ -20,7 +20,7 @@ public class Main {
         System.out.println("- Encoded --------------");
         System.out.println(plain.readData());
 
-        
+
         System.out.println("- Decoded --------------");
         System.out.println(encoded.readData());
     }

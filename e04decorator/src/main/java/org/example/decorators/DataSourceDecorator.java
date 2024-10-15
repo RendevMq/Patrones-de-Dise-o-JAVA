@@ -1,6 +1,5 @@
 package org.example.decorators;
 
-
 public abstract class DataSourceDecorator implements DataSource {
     private DataSource wrappee;
 
