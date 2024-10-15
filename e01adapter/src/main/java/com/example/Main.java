@@ -18,7 +18,7 @@ import com.example.model.Person;
 public class Main {
 
     private static final String path =
-            "e01adapter" + File.separator +
+            //"e01adapter" + File.separator +
             "src" + File.separator +
             "main" + File.separator +
             "resources" + File.separator +
