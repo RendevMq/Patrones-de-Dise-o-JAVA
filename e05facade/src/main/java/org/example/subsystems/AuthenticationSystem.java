@@ -1,9 +1,11 @@
 package org.example.subsystems;
 
-public class AuthenticationSystem {
+import org.example.subsystems.interfaces.IAuthentication;
+
+public class AuthenticationSystem implements IAuthentication {
+    @Override
     public boolean authenticateUser(String user, String password) {
         System.out.println("Authenticating user: " + user);
-        // Lógica simulada de autenticación
         if ("FrequentFlyer123".equals(user) && "password123".equals(password)) {
             System.out.println("User authenticated successfully.");
             return true;
