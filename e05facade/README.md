@@ -1,22 +1,26 @@
 
 # Sistema de Reservación de Vuelos - Patrón Facade
 
-Este proyecto es una simulación de un sistema de **reservación de vuelos** implementado en Java utilizando el **Patrón de Diseño Facade**. El objetivo es ocultar la complejidad de varios subsistemas, como la gestión de vuelos, la disponibilidad de asientos, el sistema de pagos, el sistema de recompensas y el servicio de notificaciones, proporcionando una interfaz sencilla para los clientes a través de una **fachada**.
+Este proyecto es una simulación avanzada de un sistema de **reservación de vuelos** implementado en Java utilizando el **Patrón de Diseño Facade**. El objetivo es proporcionar una interfaz simplificada para que el cliente interactúe con múltiples subsistemas sin necesidad de conocer su complejidad interna. Adicionalmente, se ha implementado una **fachada adicional** que maneja ciertas operaciones específicas para separar responsabilidades y hacer que el código sea más modular y mantenible.
+
+<p align="center">
+  <img src="./images/img.png" alt="reto" width="800"/>
+</p>
 
 ### Subsistemas
 
-Cada subsistema realiza una función específica relacionada con el proceso de reservación de vuelos:
+El sistema se compone de varios subsistemas que manejan diferentes partes del proceso de reservación de vuelos:
 
-- **AuthenticationSystem**: Verifica la autenticación del usuario.
-- **FlightManagement**: Busca vuelos disponibles entre dos destinos y verifica la clase de vuelo (económica, business, primera clase).
-- **SeatAvailability**: Verifica la disponibilidad de asientos en el vuelo seleccionado.
-- **PaymentSystem**: Procesa los pagos, calcula impuestos y valida las tarjetas de crédito.
-- **RewardSystem**: Aplica puntos de recompensa basados en el monto gastado.
-- **NotificationService**: Envía correos electrónicos de confirmación a los clientes.
+- **AuthenticationSystem**: Autentica al usuario antes de realizar cualquier operación.
+- **FlightManagement**: Busca vuelos disponibles según los destinos y la clase seleccionada (económica, business, primera clase).
+- **SeatAvailability**: Verifica si hay asientos disponibles en el vuelo seleccionado.
+- **PaymentSystem**: Procesa los pagos, valida las tarjetas de crédito y calcula impuestos.
+- **NotificationService**: Envía correos electrónicos para notificar a los clientes sobre el estado de sus reservas.
+- **RewardSystem**: Gestiona y aplica puntos de recompensa según el monto gastado por el cliente.
 
-### Facade
+### Fachada Principal (BookingFacade)
 
-La clase **BookingFacade** simplifica el proceso de reserva de vuelo, encapsulando todas las operaciones necesarias de los subsistemas. Los clientes solo necesitan llamar al método `bookFlight` de la fachada, y esta se encargará de las operaciones internas.
+La clase **BookingFacade** centraliza las operaciones más importantes, como la autenticación, búsqueda de vuelos, verificación de disponibilidad de asientos y procesamiento de pagos. También delega la responsabilidad de manejar las notificaciones y recompensas a la **NotificationRewardFacade**.
 
 ```java
 // Ejemplo de uso del BookingFacade
@@ -27,7 +31,18 @@ bookingFacade.bookFlight(
 );
 ```
 
-## Requisitos
+### Fachada Adicional (NotificationRewardFacade)
+
+La **NotificationRewardFacade** maneja la lógica relacionada con el envío de notificaciones y la aplicación de puntos de recompensa. Esta fachada adicional permite desacoplar ciertas responsabilidades de la fachada principal, haciendo que el código sea más modular y fácil de mantener.
+
+```java
+// Ejemplo de uso de la NotificationRewardFacade (internamente usada por BookingFacade)
+NotificationRewardFacade notificationRewardFacade = new NotificationRewardFacade();
+notificationRewardFacade.applyRewardPoints("FrequentFlyer123", 800.00);
+notificationRewardFacade.sendNotification("customer@example.com", "Booking confirmed", true);
+```
+
+### Requisitos
 
 - **Java 8** o superior.
 - Un IDE o entorno que permita la ejecución de proyectos Java (como IntelliJ IDEA, Eclipse, o la terminal con el compilador `javac`).
@@ -38,15 +53,15 @@ bookingFacade.bookFlight(
 2. Importa el proyecto en tu IDE de preferencia.
 3. Asegúrate de que el proyecto esté correctamente configurado para usar al menos Java 8.
 4. Navega a la clase `Client.java` que se encuentra en el paquete `com.airline.client`.
-5. Ejecuta la clase `Client.java`. Esto realizará el proceso completo de reserva de vuelo utilizando la fachada.
+5. Ejecuta la clase `Client.java`. Esto realizará el proceso completo de reserva de vuelo utilizando la **fachada principal** (BookingFacade) y la **fachada adicional** (NotificationRewardFacade) para manejar recompensas y notificaciones.
 
 El sistema realizará las siguientes operaciones:
-- Autenticará al usuario.
-- Buscará vuelos disponibles.
-- Verificará la disponibilidad de asientos.
-- Procesará el pago.
-- Aplicará puntos de recompensa.
-- Enviará una notificación de confirmación al correo electrónico del cliente.
+- Autenticar al usuario.
+- Buscar vuelos disponibles.
+- Verificar la disponibilidad de asientos.
+- Procesar el pago y calcular impuestos.
+- Aplicar puntos de recompensa (usando la fachada adicional).
+- Enviar una notificación de confirmación al correo electrónico del cliente (usando la fachada adicional).
 
 ## Ejemplo de Salida Esperada
 
@@ -67,14 +82,10 @@ Flight booking completed successfully.
 
 ## Extensiones y Mejora del Proyecto
 
-Este proyecto es una base sólida para un sistema de reservación de vuelos y puede extenderse en varias direcciones:
+Este proyecto puede extenderse en varias direcciones para simular un sistema más realista y robusto:
 
 - **Soporte para múltiples métodos de pago**: Agregar soporte para otros métodos como PayPal, Apple Pay, etc.
 - **Notificaciones SMS o Push**: Mejorar el sistema de notificaciones para que incluya SMS o notificaciones push.
-- **Manejo de errores**: Ampliar el manejo de excepciones y errores para situaciones como vuelos llenos o fallas en los pagos.
-- **Persistencia de Datos**: Integrar una base de datos para almacenar los detalles de las reservas.
-
-## Créditos
-
-Este proyecto es un ejemplo educativo basado en el patrón de diseño **Facade**, y su objetivo es demostrar cómo encapsular la complejidad de múltiples subsistemas para facilitar el uso por parte del cliente.
-
+- **Manejo de errores**: Ampliar el manejo de excepciones y errores para situaciones como vuelos llenos, fallas en los pagos, o problemas de autenticación.
+- **Persistencia de Datos**: Integrar una base de datos para almacenar los detalles de las reservas de vuelos.
+- **Uso de una API externa**: Conectar el sistema a una API de vuelos para obtener información en tiempo real sobre disponibilidad y precios.
